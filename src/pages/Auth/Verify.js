@@ -1,15 +1,22 @@
-import React from "react";
-import { ReactComponent as BackArrow } from "../../assets/back.svg";
-import { ReactComponent as EmailSvg } from "../../assets/email.svg";
-import CommonLayout from "../../layout/AuthLayout";
-import { Link, useNavigate } from "react-router-dom";
-import InputWithIcon from "../../components/InputWithIcon";
+import React, { useState } from "react";
 
-function ForgotPassword() {
+import { Link, useNavigate } from "react-router-dom";
+import { ReactComponent as BackArrow } from "../../assets/back.svg";
+import CommonLayout from "../../layout/AuthLayout";
+import OTPInput from "react-otp-input";
+
+function Verify() {
   const navigate = useNavigate();
+
+  const [OTP, setOTP] = useState("");
+
+  function handleChange(OTP) {
+    setOTP(OTP);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/verify");
+    navigate("/reset-password");
   };
 
   return (
@@ -20,26 +27,43 @@ function ForgotPassword() {
     individual rights and dignity."
     >
       <div className="col-span-6 lg:col-span-2  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
-        <div className="w-full max-w-[430px] pl-[0px] lg:pl-[48px] px-5 lg:px-0">
-          <div className="mb-[32px]">
+        <div className="w-full max-w-[430px] pl-[0px] lg:pl-[48px] pr-0 md:pr-10 ">
+          <div className="mb-[32px] ">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
-            <h1 className="text-4xl font-extrabold mb-2">Ready to Use AI50?</h1>
-            <p className="text-base ">
-              Forgot Password, Enter Email address below we’ll send you a
-              Verification Code
+            <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
+              Ready to Use AI50?
+            </h1>
+            <p className="text-base text-center lg:text-left ">
+              Verify your Email Address, Enter OTP
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="px-4 lg:px-0">
-            <InputWithIcon
-              icon={EmailSvg}
-              placeholder="Email Address"
-              type="email"
+          <form onSubmit={handleSubmit} className="px-4 lg:px-0 text-center">
+            <OTPInput
+              className="p-2 bg-transparent"
+              value={OTP}
+              onChange={handleChange}
+              numInputs={6}
+              inputStyle={
+                {
+                  // background: "transparent",
+                  // padding: "10px",
+                  // color: "#fff",
+                }
+              }
+              skipDefaultStyles
+              renderSeparator={<span className="mr-2"> </span>}
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  className="p-4 border bg-transparent border-[#312E36] rounded-lg focus:outline-none w-full focus:border-customGreen text-center"
+                />
+              )}
             />
 
             <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full mt-5">
-              Send OTP
+              Verify
             </button>
           </form>
           <p className="mt-8 text-base ">
@@ -69,4 +93,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default Verify;

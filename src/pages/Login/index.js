@@ -44,13 +44,15 @@ function Login() {
     individual rights and dignity."
     >
       <div className="col-span-6 lg:col-span-2  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
-        <div className="w-full max-w-[430px] pl-[0px] lg:pl-[48px] px-5 lg:px-0">
+        <div className="w-full max-w-[430px] pl-[0px] lg:pl-[48px] pr-0 md:pr-10 xl:pr-0">
           <div className="mb-[32px]">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
-            <h1 className="text-4xl font-extrabold mb-2">Ready to Use AI50?</h1>
-            <p className="text-base ">Sign In</p>
+            <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
+              Ready to Use AI50?
+            </h1>
+            <p className="text-base text-center lg:text-left ">Sign In</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="px-4 lg:px-0">
             <InputWithIcon
