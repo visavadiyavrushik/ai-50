@@ -52,10 +52,10 @@ function ResetPassword() {
 
           <p className="my-10 border-t border-gray-400 text-sm text-center"></p>
           <p className="text-lg font-semibold">
-            <Link to="/login" className="underline text-customGreen">
-              Sign In &nbsp;
-            </Link>
-            {"   "}
+            <Link to="/signin" className="underline text-customGreen">
+              {""}
+              Sign in{""}&nbsp;
+            </Link>{" "}
             If you have an account
           </p>
         </div>

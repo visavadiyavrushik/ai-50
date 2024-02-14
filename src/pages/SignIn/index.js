@@ -1,15 +1,29 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import { ReactComponent as BackArrow } from "../../assets/back.svg";
 import { ReactComponent as EmailSvg } from "../../assets/email.svg";
-import CommonLayout from "../../layout/AuthLayout";
-import { Link, useNavigate } from "react-router-dom";
-import InputWithIcon from "../../components/InputWithIcon";
+import { ReactComponent as PasswordSvg } from "../../assets/password.svg";
+import { useForm } from "react-hook-form";
 
-function ForgotPassword() {
+import { yupResolver } from "@hookform/resolvers/yup";
+import CommonLayout from "../../layout/AuthLayout";
+import InputWithIcon from "../../components/InputWithIcon";
+import signInSchema from "../../validators/signInSchema";
+
+function SignIn() {
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/verify");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signInSchema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
@@ -25,21 +39,34 @@ function ForgotPassword() {
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
-            <h1 className="text-4xl font-extrabold mb-2">Ready to Use AI50?</h1>
-            <p className="text-base ">
-              Forgot Password, Enter Email address below we’ll send you a
-              Verification Code
-            </p>
+            <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
+              Ready to Use AI50?
+            </h1>
+            <p className="text-base text-center lg:text-left ">Sign In</p>
           </div>
-          <form onSubmit={handleSubmit} className="px-4 lg:px-0">
+          <form onSubmit={handleSubmit(onSubmit)} className="px-4 lg:px-0">
             <InputWithIcon
               icon={EmailSvg}
               placeholder="Email Address"
               type="email"
+              {...register("email")}
+              error={errors.email?.message}
             />
-
+            <InputWithIcon
+              icon={PasswordSvg}
+              placeholder="Password"
+              type="password"
+              {...register("password")}
+              error={errors.password?.message}
+            />
+            <p
+              className="text-sm text-end text-customGreen  cursor-pointer"
+              onClick={() => navigate("/forgot-password")}
+            >
+              Forgot Password?
+            </p>
             <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full mt-5">
-              Send OTP
+              Sign In
             </button>
           </form>
           <p className="mt-8 text-base ">
@@ -57,10 +84,9 @@ function ForgotPassword() {
           <p className="my-10 border-t border-gray-400 text-sm text-center"></p>
           <p className="text-lg font-semibold">
             <Link to="/signup" className="underline text-customGreen">
-              {" "}
-              Sign up{"  "} &nbsp;
-            </Link>
-            {"   "}
+              {""}
+              Sign up{""}&nbsp;
+            </Link>{" "}
             If you don’t have an account
           </p>
         </div>
@@ -69,4 +95,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default SignIn;
