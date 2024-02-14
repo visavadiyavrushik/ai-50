@@ -9,7 +9,7 @@ function ForgotPassword() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/verify");
+    navigate("/verify-otp");
   };
 
   return (
@@ -21,7 +21,7 @@ function ForgotPassword() {
     >
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
         <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
-          <div className="mb-[32px]">
+          <div className="mb-[8]">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>

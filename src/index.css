@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    font-family: "Outfit", sans-serif;
+body {
+  font-family: "Outfit", sans-serif;
+}
+.icon-btn {
+  svg {
+    margin-right: 12px;
+    path {
+      fill: #000;
+    }
+  }
+}
+
+.inputWithIcon {
+  svg {
+    path {
+      opacity: 0.2;
+    }
+  }
 }

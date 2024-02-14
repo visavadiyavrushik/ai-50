@@ -27,10 +27,10 @@ function SignUp() {
   };
 
   return (
-    <CommonLayout>
+    <CommonLayout description="Empower your business strategy with deep data insights. Transform complex information into actionable decisions, fostering growth and competitive advantage.">
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
         <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
-          <div className="mb-[32px]">
+          <div className="mb-[8]">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
@@ -66,7 +66,7 @@ function SignUp() {
               {...register("confirm_password")}
               error={errors.confirm_password?.message}
             />
-            <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full">
+            <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full mt-5">
               Sign Up
             </button>
           </form>
