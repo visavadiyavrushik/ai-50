@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { DoenArrowIcon } from "../assets";
 
-const Accordion = ({ title, answer }) => {
+const ChatAccordion = ({ title, answer }) => {
   const [accordionOpen, setAccordionOpen] = useState(true);
 
   return (
     <div className="">
       <button
         onClick={() => setAccordionOpen(!accordionOpen)}
-        className="flex justify-between w-full my-4"
+        className="flex justify-between w-full hover:bg-gray-100 px-2 rounded-lg"
       >
-        <span>{title}</span>
+        <span className="text-xl font-semibold">{title}</span>
         <DoenArrowIcon className={`${accordionOpen ? "!rotate-180" : ""}`} />
       </button>
       <div
@@ -26,4 +26,4 @@ const Accordion = ({ title, answer }) => {
   );
 };
 
-export default Accordion;
+export default ChatAccordion;

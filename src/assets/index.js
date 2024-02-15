@@ -29,3 +29,7 @@ export { ReactComponent as ChatIcon } from "./Chat.svg";
 
 export { ReactComponent as ArchiveIcon } from "./archive.svg";
 export { ReactComponent as KababIcon } from "./roundKabab.svg";
+export { ReactComponent as PinIcon } from "./pinIcon.svg";
+
+export { ReactComponent as MemberIcon } from "./inviteMember.svg";
+export { ReactComponent as WorkspaceIcon } from "./workspace.svg";
