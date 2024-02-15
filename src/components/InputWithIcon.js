@@ -9,6 +9,7 @@ const InputWithIcon = React.forwardRef(
       customClass = "",
       mainDiv = "",
       error,
+      bgColor,
       ...props
     },
     ref
@@ -23,9 +24,10 @@ const InputWithIcon = React.forwardRef(
           type={type}
           className={`pl-10 pr-4 py-3 border ${
             error ? "border-red-500" : "border-[#312E36] "
-          } bg-transparent rounded-lg focus:outline-none w-full ${
-            error ? "focus:border-red-500" : "focus:border-customGreen"
-          } ${customClass}`}
+          }  ${bgColor || "bg-transparent"}
+           rounded-lg focus:outline-none w-full ${
+             error ? "focus:border-red-500" : "focus:border-customGreen"
+           } ${customClass}`}
           placeholder={placeholder}
           {...props}
         />

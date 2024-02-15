@@ -22,3 +22,10 @@ export { ReactComponent as PricingIcon } from "./pricing.svg";
 export { ReactComponent as InfoIcon } from "./info.svg";
 export { ReactComponent as ContactIcon } from "./phone.svg";
 export { ReactComponent as LogoutIcon } from "./logout.svg";
+
+export { ReactComponent as InputSearchIcon } from "./InputSearch.svg";
+
+export { ReactComponent as ChatIcon } from "./Chat.svg";
+
+export { ReactComponent as ArchiveIcon } from "./archive.svg";
+export { ReactComponent as KababIcon } from "./roundKabab.svg";

@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }) => {
         <Sidebar />
         <main className="flex-1">
           <Header />
-          <div className="h-[calc(100%-72px)] bg-[#dadada] ">{children}</div>
+          <div className="h-[calc(100%-72px)] bg-customGray ">{children}</div>
         </main>
       </div>
     </div>

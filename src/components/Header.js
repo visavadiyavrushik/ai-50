@@ -13,7 +13,7 @@ import ProfileHeader from "./ProfileHeader";
 const Header = () => {
   const { currentTheme, changeCurrentTheme } = useThemeProvider();
 
-  const toggleMode = (value) => {
+  const toggleMode = () => {
     if (currentTheme === "light") {
       changeCurrentTheme("dark");
     } else {
