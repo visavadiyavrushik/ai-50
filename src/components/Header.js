@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Avtar,
   DarkModeIcon,
   FullScreenIcon,
   LanguageIcon,
@@ -8,8 +7,8 @@ import {
   NotificationIcon,
   SearchIcon,
 } from "../assets";
-import ProfileHeader from "./ProfileHeader";
 import { useThemeProvider } from "../utils/ThemeContext";
+import ProfileHeader from "./ProfileHeader";
 
 const Header = () => {
   const { currentTheme, changeCurrentTheme } = useThemeProvider();
