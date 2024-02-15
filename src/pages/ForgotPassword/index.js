@@ -21,7 +21,7 @@ function ForgotPassword() {
     >
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
         <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
-          <div className="mb-[8]">
+          <div className="mb-8">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
@@ -58,9 +58,9 @@ function ForgotPassword() {
           <p className="text-lg font-semibold">
             <Link to="/signup" className="underline text-customGreen">
               {""}
-              Sign up{""}&nbsp;
+              Sign up{""}
             </Link>{" "}
-            If you don’t have an account
+            &nbsp;If you don’t have an account
           </p>
         </div>
       </div>

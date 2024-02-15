@@ -35,7 +35,7 @@ function SignIn() {
     >
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
         <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
-          <div className="mb-[8]">
+          <div className="mb-8">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
@@ -59,11 +59,14 @@ function SignIn() {
               {...register("password")}
               error={errors.password?.message}
             />
-            <p
-              className="text-sm text-end text-customGreen  cursor-pointer"
-              onClick={() => navigate("/forgot-password")}
-            >
-              Forgot Password?
+            <p className="text-sm text-end text-customGreen  ">
+              <span
+                className="cursor-pointer"
+                onClick={() => navigate("/forgot-password")}
+              >
+                {" "}
+                Forgot Password?
+              </span>
             </p>
             <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full mt-5">
               Sign In
@@ -85,9 +88,9 @@ function SignIn() {
           <p className="text-lg font-semibold">
             <Link to="/signup" className="underline text-customGreen">
               {""}
-              Sign up{""}&nbsp;
+              Sign up{""}
             </Link>{" "}
-            If you don’t have an account
+            &nbsp;If you don’t have an account
           </p>
         </div>
       </div>

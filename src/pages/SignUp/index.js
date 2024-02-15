@@ -30,7 +30,7 @@ function SignUp() {
     <CommonLayout description="Empower your business strategy with deep data insights. Transform complex information into actionable decisions, fostering growth and competitive advantage.">
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
         <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
-          <div className="mb-[8]">
+          <div className="mb-8">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
@@ -86,9 +86,9 @@ function SignUp() {
           <p className="text-lg font-semibold">
             <Link to="/signin" className="underline text-customGreen">
               {""}
-              Sign in{""}&nbsp;
+              Sign in{""}
             </Link>{" "}
-            If you have an account
+            &nbsp;If you have an account
           </p>
         </div>
       </div>

@@ -46,9 +46,9 @@ function SocialSignIn() {
           <p className="text-lg font-semibold">
             <Link to="/signin" className="underline text-customGreen">
               {""}
-              Sign in{""}&nbsp;
+              Sign in{""}
             </Link>{" "}
-            If you have an account
+            &nbsp;If you have an account
           </p>
         </div>
       </div>
