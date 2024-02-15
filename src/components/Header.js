@@ -8,18 +8,18 @@ import {
   NotificationIcon,
   SearchIcon,
 } from "../assets";
+import ProfileHeader from "./ProfileHeader";
+import { useThemeProvider } from "../utils/ThemeContext";
 
 const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState("lightMode");
+  const { currentTheme, changeCurrentTheme } = useThemeProvider();
 
   const toggleMode = (value) => {
-    setIsDarkMode(value);
-    // if (value === "lightMode") {
-    //   setIsDarkMode(false);
-    // } else {
-    //   setIsDarkMode(true);
-    // }
-    // You can add logic here to toggle between light and dark mode classes on your entire app
+    if (currentTheme === "light") {
+      changeCurrentTheme("dark");
+    } else {
+      changeCurrentTheme("light");
+    }
   };
 
   const handleFullScreen = () => {
@@ -29,7 +29,7 @@ const Header = () => {
   };
 
   return (
-    <header className="h-[72px] flex items-center justify-between px-6  bg-white w-full">
+    <header className="h-[72px] flex items-center justify-between px-6  bg-white  w-full">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center ">
           <h1 className="text-lg font-semibold text-[22px] mr-3">AI Chat</h1>
@@ -47,7 +47,7 @@ const Header = () => {
           <div className="max-w-24 flex items-center justify-between bg-[#F3F3F3] p-1 rounded mr-5">
             <button
               className={`mr-2 p-1 rounded ${
-                isDarkMode === "lightMode" ? "bg-white " : ""
+                currentTheme === "light" ? "bg-white " : ""
               }`}
               onClick={() => toggleMode("lightMode")}
             >
@@ -55,7 +55,7 @@ const Header = () => {
             </button>
             <button
               className={` p-1 rounded ${
-                isDarkMode === "darkMode" ? "bg-white " : ""
+                currentTheme === "dark" ? "bg-white " : ""
               }`}
               onClick={() => toggleMode("darkMode")}
             >
@@ -75,15 +75,8 @@ const Header = () => {
             <FullScreenIcon />
           </button>
           {/* Profile */}
-          <div className="flex items-center gap-4">
-            <img className="w-10 h-10 rounded" src={Avtar} alt="" />
-            <div className="font-medium">
-              <div>Mark Roastler</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                Pro Trial
-              </div>
-            </div>
-          </div>
+          <div className="flex items-center gap-4"></div>
+          <ProfileHeader />
         </div>
       </div>
     </header>

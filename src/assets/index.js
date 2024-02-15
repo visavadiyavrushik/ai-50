@@ -14,3 +14,11 @@ export { ReactComponent as SearchIcon } from "./search.svg";
 export { ReactComponent as NotificationIcon } from "./notification.svg";
 export { ReactComponent as LightModeIcon } from "./lightmode.svg";
 export { ReactComponent as DarkModeIcon } from "./darkmode.svg";
+export { ReactComponent as DoenArrowIcon } from "./downArrow.svg";
+
+// Profile
+
+export { ReactComponent as PricingIcon } from "./pricing.svg";
+export { ReactComponent as InfoIcon } from "./info.svg";
+export { ReactComponent as ContactIcon } from "./phone.svg";
+export { ReactComponent as LogoutIcon } from "./logout.svg";

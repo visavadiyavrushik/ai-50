@@ -24,6 +24,7 @@ function SignIn() {
 
   const onSubmit = (data) => {
     console.log(data);
+    navigate("/dashboard");
   };
 
   return (
