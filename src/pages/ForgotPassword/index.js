@@ -19,19 +19,21 @@ function ForgotPassword() {
     technologies, ensuring they serve humanity responsibly and protect
     individual rights and dignity."
     >
-      <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1">
+      <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1 px-3 lg:px-0">
         <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
           <div className="mb-8">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
             </button>
-            <h1 className="text-4xl font-extrabold mb-2">Ready to Use AI50?</h1>
-            <p className="text-base ">
+            <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
+              Ready to Use AI50?
+            </h1>
+            <p className="text-base text-center lg:text-left ">
               Forgot Password, Enter Email address below we’ll send you a
               Verification Code
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="px-4 lg:px-0">
+          <form onSubmit={handleSubmit} className="">
             <InputWithIcon
               icon={EmailSvg}
               placeholder="Email Address"
@@ -55,8 +57,11 @@ function ForgotPassword() {
           </p>
 
           <p className="my-10 border-t border-gray-400 text-sm text-center"></p>
-          <p className="text-lg font-semibold">
-            <Link to="/signup" className="underline text-customGreen">
+          <p className="text-lg font-semibold text-center lg:text-left">
+            <Link
+              to="/signup"
+              className="underline text-customGreen text-center lg:text-left "
+            >
               {""}
               Sign up{""}
             </Link>{" "}
