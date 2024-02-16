@@ -3,6 +3,8 @@ export { default as Avtar } from "./Avtar.jpg";
 export { ReactComponent as SideBarLogo } from "./logo.svg";
 
 export { ReactComponent as EmailIcon } from "./email.svg";
+export { ReactComponent as EmailBlackIcon } from "./emailBlack.svg";
+
 export { ReactComponent as BackArrowIcon } from "./back.svg";
 export { ReactComponent as PasswordIcon } from "./password.svg";
 export { ReactComponent as GoogleIcon } from "./google.svg";
@@ -15,8 +17,6 @@ export { ReactComponent as NotificationIcon } from "./notification.svg";
 export { ReactComponent as LightModeIcon } from "./lightmode.svg";
 export { ReactComponent as DarkModeIcon } from "./darkmode.svg";
 export { ReactComponent as DoenArrowIcon } from "./downArrow.svg";
-
-// Profile
 
 export { ReactComponent as PricingIcon } from "./pricing.svg";
 export { ReactComponent as InfoIcon } from "./info.svg";
@@ -33,3 +33,11 @@ export { ReactComponent as PinIcon } from "./pinIcon.svg";
 
 export { ReactComponent as MemberIcon } from "./inviteMember.svg";
 export { ReactComponent as WorkspaceIcon } from "./workspace.svg";
+
+export { ReactComponent as PaperClipIcon } from "./paperClip.svg";
+export { ReactComponent as SendIcon } from "./send.svg";
+
+export { ReactComponent as CirclePlusIcon } from "./circlePlus.svg";
+
+export { ReactComponent as CircleMinusIcon } from "./circleMinus.svg";
+export { ReactComponent as ChatBrandLogo } from "./chatbrnadLogo.svg";

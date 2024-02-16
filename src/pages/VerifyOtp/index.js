@@ -1,33 +1,67 @@
-import React, { useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import OTPInput from "react-otp-input";
 import { ReactComponent as BackArrow } from "../../assets/back.svg";
 import CommonLayout from "../../layout/AuthLayout";
-import OTPInput from "react-otp-input";
+import { AuthApi } from "../../services/apis/AuthApis";
+import { Toast } from "../../utils/Toasts";
+import ButtonWithLoader from "../../components/ButtonWithLoader";
 
 function VerifyOTP() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [OTP, setOTP] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!location.state || !location.state.data) {
+      navigate("/signup");
+    }
+  }, [location.state, navigate]);
+
+  if (!location.state || !location.state.data) {
+    return null;
+  }
 
   function handleChange(OTP) {
     setOTP(OTP);
   }
 
-  const handleSubmit = (e) => {
+  const validateOtp = (otp) => {
+    return /^\d{6}$/.test(otp);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/reset-password");
+
+    if (!validateOtp(OTP)) {
+      setIsLoading(false);
+      Toast.error("Invalid OTP format. Please enter a 6-digit OTP.");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await AuthApi.verifyOtp({
+        otp: OTP,
+        email: location.state.data.email,
+      });
+
+      const response = await AuthApi.signup(location.state.data);
+      Toast.success(response.message);
+
+      navigate("/signin");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <CommonLayout
-      title="Harness Data For Smarter Decisions."
-      description=" As AI creators, we must embed our highest ethical standards into these
-    technologies, ensuring they serve humanity responsibly and protect
-    individual rights and dignity."
-    >
+    <CommonLayout>
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1 px-3 lg:px-0">
-        <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
+        <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] 2xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
           <div className="mb-8 ">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
@@ -35,11 +69,11 @@ function VerifyOTP() {
             <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
               Ready to Use AI50?
             </h1>
-            <p className="text-base text-center lg:text-left ">
+            <p className="text-lg text-center lg:text-left ">
               Verify your Email Address, Enter OTP
             </p>
           </div>
-          <form onSubmit={handleSubmit} className=" text-center">
+          <form onSubmit={handleSubmit} className="text-center">
             <OTPInput
               className="p-2 bg-transparent"
               value={OTP}
@@ -62,11 +96,14 @@ function VerifyOTP() {
               )}
             />
 
-            <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full mt-5">
+            <ButtonWithLoader
+              isLoading={isLoading}
+              disabled={isLoading || !OTP || OTP.length < 6}
+            >
               Verify
-            </button>
+            </ButtonWithLoader>
           </form>
-          <p className="mt-8 text-base ">
+          <p className="mt-8 text-lg">
             By signing up, you agree to the{" "}
             <Link to="#" className="underline">
               Terms of Service
@@ -79,7 +116,7 @@ function VerifyOTP() {
           </p>
 
           <p className="my-10 border-t border-gray-400 text-sm text-center"></p>
-          <p className="text-lg font-semibold text-center lg:text-left">
+          <p className="text-xl font-semibold text-center lg:text-left">
             <Link
               to="/signup"
               className="underline text-customGreen text-center lg:text-left "

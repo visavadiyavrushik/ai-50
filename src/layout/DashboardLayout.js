@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -10,6 +11,7 @@ const DashboardLayout = ({ children }) => {
         <main className="flex-1">
           <Header />
           <div className="h-[calc(100%-72px)] bg-customGray ">{children}</div>
+          <Footer />
         </main>
       </div>
     </div>

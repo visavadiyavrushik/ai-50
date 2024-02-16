@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import CommonLayout from "../../layout/AuthLayout";
+import InputWithIcon from "../../components/InputWithIcon";
+import ButtonWithLoader from "../../components/ButtonWithLoader";
+import signInSchema from "../../validators/signInSchema";
+import { AuthApi } from "../../services/apis/AuthApis";
+import { Toast } from "../../utils/Toasts";
 
 import { ReactComponent as BackArrow } from "../../assets/back.svg";
 import { ReactComponent as EmailSvg } from "../../assets/email.svg";
 import { ReactComponent as PasswordSvg } from "../../assets/password.svg";
-import { useForm } from "react-hook-form";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import CommonLayout from "../../layout/AuthLayout";
-import InputWithIcon from "../../components/InputWithIcon";
-import signInSchema from "../../validators/signInSchema";
-
-function SignIn() {
+const SignIn = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -22,20 +26,24 @@ function SignIn() {
     resolver: yupResolver(signInSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate("/dashboard");
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      const response = await AuthApi.signin(data);
+      localStorage.setItem("accessToken", response.data.access);
+      Toast.success("Signed in successfully");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <CommonLayout
-      title="Harness Data For Smarter Decisions."
-      description=" As AI creators, we must embed our highest ethical standards into these
-    technologies, ensuring they serve humanity responsibly and protect
-    individual rights and dignity."
-    >
+    <CommonLayout>
       <div className="col-span-7 lg:col-span-3  bg-black text-white flex justify-center items-center lg:items-start flex-col h-screen order-0 lg:order-1 px-3 lg:px-0">
-        <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
+        <div className="w-full max-w-[430px] pl-[0px] lg:ml-[40px] 2xl:ml-[140px] pr-0 md:pr-10 xl:pr-0">
           <div className="mb-8">
             <button className="mb-4" onClick={() => navigate(-1)}>
               <BackArrow />
@@ -43,9 +51,9 @@ function SignIn() {
             <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
               Ready to Use AI50?
             </h1>
-            <p className="text-base text-center lg:text-left ">Sign In</p>
+            <p className="text-lg text-center lg:text-left">Sign In</p>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <InputWithIcon
               icon={EmailSvg}
               placeholder="Email Address"
@@ -60,7 +68,7 @@ function SignIn() {
               {...register("password")}
               error={errors.password?.message}
             />
-            <p className="text-sm text-end text-customGreen  ">
+            <p className="text-base text-end text-customGreen  ">
               <span
                 className="cursor-pointer"
                 onClick={() => navigate("/forgot-password")}
@@ -69,11 +77,11 @@ function SignIn() {
                 Forgot Password?
               </span>
             </p>
-            <button className="bg-customGreen hover:bg-[#00b796d4] text-white font-bold py-2 px-4 rounded w-full mt-5">
+            <ButtonWithLoader isLoading={isLoading} disabled={isLoading}>
               Sign In
-            </button>
+            </ButtonWithLoader>
           </form>
-          <p className="mt-8 text-base ">
+          <p className="mt-8 text-lg">
             By signing up, you agree to the{" "}
             <Link to="#" className="underline">
               Terms of Service
@@ -84,22 +92,20 @@ function SignIn() {
             </Link>
             .
           </p>
-
           <p className="my-10 border-t border-gray-400 text-sm text-center"></p>
-          <p className="text-lg font-semibold text-center lg:text-left">
+          <p className="text-xl font-semibold text-center lg:text-left">
             <Link
               to="/signup"
               className="underline text-customGreen text-center lg:text-left "
             >
-              {""}
-              Sign up{""}
-            </Link>{" "}
+              Sign up
+            </Link>
             &nbsp;If you don’t have an account
           </p>
         </div>
       </div>
     </CommonLayout>
   );
-}
+};
 
 export default SignIn;

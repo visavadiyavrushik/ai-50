@@ -1,4 +1,3 @@
-// Sidebar.js
 import React from "react";
 import {
   ArchiveIcon,
@@ -10,10 +9,9 @@ import {
   PlusIcon,
   SideBarLogo,
   WorkspaceIcon,
-} from "../assets";
-import InputWithIcon from "./InputWithIcon";
-import ChatAccordion from "./ChatAccordion";
-// import ChatAccordion from "./ChatAccordion";
+} from "../../assets";
+import InputWithIcon from "../InputWithIcon";
+import SidebarAccordion from "../SidebarAccordion";
 
 const Sidebar = () => {
   return (
@@ -42,7 +40,7 @@ const Sidebar = () => {
         />
         {/* Pinned */}
         <div className="mt-4">
-          <ChatAccordion
+          <SidebarAccordion
             title="Pinned"
             answer={
               <>
@@ -86,7 +84,7 @@ const Sidebar = () => {
         </div>
         <div className="mt-4">
           {/* History */}
-          <ChatAccordion
+          <SidebarAccordion
             title="History"
             answer={
               <>
