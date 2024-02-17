@@ -12,7 +12,7 @@ import { AuthApi } from "../../services/apis/AuthApis";
 import forgotPasswordSchema from "../../validators/forgotPasswordSchema";
 import ButtonWithLoader from "../../components/ButtonWithLoader";
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +65,7 @@ function ForgotPassword() {
               Submit
             </ButtonWithLoader>
           </form>
-          <p className="mt-8 text-lg">
+          <p className="mt-8 text-lg ">
             By signing up, you agree to the{" "}
             <Link to="#" className="underline">
               Terms of Service
@@ -92,6 +92,6 @@ function ForgotPassword() {
       </div>
     </CommonLayout>
   );
-}
+};
 
 export default ForgotPassword;

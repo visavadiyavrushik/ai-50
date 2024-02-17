@@ -4,7 +4,7 @@ import Loading from "../components/Loading";
 const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const SocialSignup = lazy(() => import("../pages/SocialSignIn"));
-const VerifyOtp = lazy(() => import("../pages/VerifyOtp"));
+const VerifyCode = lazy(() => import("../pages/VerifyCode"));
 const ForgotPassword = lazy(() => import("../pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("../pages/ResetPassword"));
 
@@ -35,10 +35,10 @@ const authRoutes = [
     ),
   },
   {
-    path: "verify-otp",
+    path: "verify-code",
     element: (
       <Suspense fallback={<Loading />}>
-        <VerifyOtp />
+        <VerifyCode />
       </Suspense>
     ),
   },

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import {
-  ArchiveIcon,
+  // ArchiveIcon,
   Avtar,
   ChatBrandLogo,
   PaperClipIcon,
   SendIcon,
 } from "../../assets";
-import ChatAccordion from "../../components/ChatAccordion";
 import DashboardLayout from "../../layout/DashboardLayout";
 
 const data = [
@@ -51,18 +50,17 @@ const data2 = [
 
 export default function Dashboard() {
   const [Chat, setChat] = useState(false);
-  console.log("Chat: ", Chat);
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Corrected preventDefault
+    e.preventDefault();
     setChat(true);
   };
 
   return (
     <DashboardLayout>
-      <div className="max-w-[992px] m-auto h-full relative">
+      <div className="w-full px-4 xl:px-0 md:max-w=[800px] xl:max-w-[900px] 2xl:max-w-[1265px] m-auto h-full relative">
         <div className="flex flex-col h-full w-full  ">
-          {Chat && (
+          {!Chat && (
             <div className=" h-full">
               {/* Logo  */}
               <div className="flex flex-col items-center mb-6">
@@ -92,16 +90,26 @@ export default function Dashboard() {
                 </h2>
                 {data.map((question, i) => (
                   <div className="mt-2" key={question.id}>
-                    <ChatAccordion
+                    {/* <ChatAccordion
                       title={question?.title}
                       answer={question?.answer}
-                    />
+                    /> */}
+                    <div className="border border-[#ddd] p-3 rounded-lg">
+                      <button
+                        // onClick={() => setAccordionOpen(!accordionOpen)}
+                        className="flex justify-between w-full hover:bg-gray-100 px-2 rounded-lg text-lg  "
+                      >
+                        <span className="text-lg font-medium">
+                          {question?.title}
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
-          {!Chat && (
+          {Chat && (
             <div className=" h-full pt-10">
               {/* user */}
               <div className="">
@@ -185,8 +193,11 @@ export default function Dashboard() {
             </div>
           )}
           {/* chat  Input  */}
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="flex items-center chat-input">
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            className="chat-input bg-customGray"
+          >
+            <div className="flex items-center ">
               <div className={`relative  inputWithIcon w-full mr-5`}>
                 <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                   <PaperClipIcon />

@@ -41,3 +41,6 @@ export { ReactComponent as CirclePlusIcon } from "./circlePlus.svg";
 
 export { ReactComponent as CircleMinusIcon } from "./circleMinus.svg";
 export { ReactComponent as ChatBrandLogo } from "./chatbrnadLogo.svg";
+
+export { ReactComponent as PenIcon } from "./pen.svg";
+export { ReactComponent as DeleteIcon } from "./DeleteIcon.svg";

@@ -78,6 +78,7 @@ const ResetPassword = () => {
               type="password"
               {...register("password")}
               error={errors.password?.message}
+              isPassword={true}
             />
             <InputWithIcon
               icon={PasswordSvg}
@@ -85,6 +86,7 @@ const ResetPassword = () => {
               type="confirmPassword"
               {...register("confirmPassword")}
               error={errors.confirmPassword?.message}
+              isPassword={true}
             />
             <ButtonWithLoader isLoading={isLoading} disabled={isLoading}>
               Reset

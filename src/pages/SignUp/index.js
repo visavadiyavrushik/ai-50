@@ -14,7 +14,7 @@ import InputWithIcon from "../../components/InputWithIcon";
 import signUpSchema from "../../validators/signUpSchema";
 import ButtonWithLoader from "../../components/ButtonWithLoader";
 
-function SignUp() {
+const SignUp = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,12 +45,12 @@ function SignUp() {
   const sendOtp = async (data) => {
     try {
       const response = await AuthApi.sendOtp({ email: data.email });
-      Toast.success("OTP has been sent to your email");
+      Toast.success(response.message);
       setTimeout(() => {
-        navigate("/verify-otp", {
+        navigate("/verify-code", {
           state: {
             data,
-            expires: response?.data?.expires,
+            expires: response?.data[0].expires,
           },
         });
       }, 1500);
@@ -95,6 +95,7 @@ function SignUp() {
               type="password"
               {...register("password")}
               error={errors.password?.message}
+              isPassword={true}
             />
             <InputWithIcon
               icon={PasswordSvg}
@@ -102,6 +103,7 @@ function SignUp() {
               type="password"
               {...register("confirm_password")}
               error={errors.confirm_password?.message}
+              isPassword={true}
             />
             <ButtonWithLoader isLoading={isLoading} disabled={isLoading}>
               Sign Up
@@ -132,6 +134,6 @@ function SignUp() {
       </div>
     </CommonLayout>
   );
-}
+};
 
 export default SignUp;

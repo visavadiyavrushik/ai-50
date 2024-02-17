@@ -4,7 +4,7 @@ import CommonLayout from "../../layout/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailBlackIcon, GoogleIcon } from "../../assets";
 
-function SocialSignIn() {
+const SocialSignIn = () => {
   const navigate = useNavigate();
   return (
     <CommonLayout>
@@ -30,7 +30,7 @@ function SocialSignIn() {
             <span className="text-black ml-3 "> Sign In with Google</span>
           </button>
 
-          <p className="mt-8 text-lg">
+          <p className="mt-8 text-lg ">
             By signing up, you agree to the{" "}
             <Link to="#" className="underline">
               Terms of Service
@@ -54,6 +54,6 @@ function SocialSignIn() {
       </div>
     </CommonLayout>
   );
-}
+};
 
 export default SocialSignIn;

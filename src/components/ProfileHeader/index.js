@@ -11,25 +11,23 @@ import {
   PricingIcon,
 } from "../../assets";
 
-export default function ProfileHeader() {
+const ProfileHeader = () => {
   const navigate = useNavigate();
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="">
-            <div className="flex text-left items-center gap-4">
-              <img className="w-10 h-10 rounded" src={Avtar} alt="" />
-              <div className="font-medium">
-                <div>Mark Roastler</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  Pro Trial
-                </div>
+        <Menu.Button className="">
+          <div className="flex text-left items-center gap-4">
+            <img className="w-10 h-10 rounded" src={Avtar} alt="" />
+            <div className="font-medium">
+              <div>Mark Roastler</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                Pro Trial
               </div>
-              <DoenArrowIcon />
             </div>
-          </Menu.Button>
-        </div>
+            <DoenArrowIcon />
+          </div>
+        </Menu.Button>
 
         <Transition
           as={Fragment}
@@ -99,4 +97,6 @@ export default function ProfileHeader() {
       </Menu>
     </div>
   );
-}
+};
+
+export default ProfileHeader;
