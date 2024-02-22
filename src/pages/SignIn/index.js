@@ -67,7 +67,6 @@ const SignIn = () => {
               type="password"
               {...register("password")}
               error={errors.password?.message}
-              isPassword={true}
             />
             <p className="text-base text-end text-customGreen  ">
               <span
@@ -82,7 +81,7 @@ const SignIn = () => {
               Sign In
             </ButtonWithLoader>
           </form>
-          <p className="mt-8 text-lg ">
+          <p className="mt-8 text-lg">
             By signing up, you agree to the{" "}
             <Link to="#" className="underline">
               Terms of Service

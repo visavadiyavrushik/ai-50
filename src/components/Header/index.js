@@ -28,8 +28,7 @@ const Header = () => {
   };
 
   return (
-    // h-[72px] flex items-center justify-between px-6  bg-white  w-full fixed z-10
-    <header className="header">
+    <header className="h-[72px] flex items-center justify-between px-6  bg-white  w-full">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center ">
           <h1 className="text-lg font-semibold text-[22px] mr-3">AI Chat</h1>

@@ -1,20 +1,18 @@
 import React from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import Footer from "../components/Footer";
 
 const DashboardLayout = ({ children }) => {
   return (
-    // <div className="">
-    <div className="flex h-full">
-      <Sidebar />
-      <div className="layout-content-wrapper ">
-        <Header />
-        <main className="bg-customGray h-full">{children}</main>
-        <Footer />
+    <div className="flex flex-col h-screen">
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1">
+          <Header />
+          <div className="h-[calc(100%-72px)] bg-customGray ">{children}</div>
+        </main>
       </div>
     </div>
-    // </div>
   );
 };
 
