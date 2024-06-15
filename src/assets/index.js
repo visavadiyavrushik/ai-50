@@ -33,3 +33,22 @@ export { ReactComponent as PinIcon } from "./pinIcon.svg";
 
 export { ReactComponent as MemberIcon } from "./inviteMember.svg";
 export { ReactComponent as WorkspaceIcon } from "./workspace.svg";
+
+export { ReactComponent as PaperClipIcon } from "./paperClip.svg";
+export { ReactComponent as SendIcon } from "./send.svg";
+
+export { ReactComponent as CirclePlusIcon } from "./circlePlus.svg";
+
+export { ReactComponent as CircleMinusIcon } from "./circleMinus.svg";
+export { ReactComponent as ChatBrandLogo } from "./chatbrnadLogo.svg";
+
+export { ReactComponent as PenIcon } from "./pen.svg";
+export { ReactComponent as DeleteIcon } from "./DeleteIcon.svg";
+
+export { ReactComponent as ThumbUp } from "./thumsUp.svg";
+export { ReactComponent as ThumbDown } from "./thumbDown.svg";
+export { ReactComponent as Clipboard } from "./clipBoard.svg";
+export { ReactComponent as Retry } from "./retry.svg";
+
+export { ReactComponent as CloseIcon } from "./closeIcon.svg";
+export { ReactComponent as NotFoundImage } from "./404.svg";

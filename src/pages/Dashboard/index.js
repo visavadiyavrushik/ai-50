@@ -1,13 +1,17 @@
-import DashboardLayout from "../../layout/DashboardLayout";
+import React from "react";
 
-export default function Dashboard() {
-  return (
-    <DashboardLayout>
-      {/* Your page content goes here */}
-      <div className="p-4">
-        <h1 className="text-2xl font-bold">Hello, World!</h1>
-        <p className="mt-2">This is a sample page content.</p>
-      </div>
-    </DashboardLayout>
+import { useAuth } from "../../hooks/useAuth";
+import ChatDefaultQuestion from "../../components/ChatDefaultQuestion";
+import { useSelector } from "react-redux";
+import ChatMessage from "../../components/ChatMessage";
+
+const Dashboard = () => {
+  // useAuth();
+  const selectedChatHistory = useSelector(
+    (state) => state.chat.selectedChatHistory
   );
-}
+
+  return !selectedChatHistory ? <ChatDefaultQuestion /> : <ChatMessage />;
+};
+
+export default Dashboard;

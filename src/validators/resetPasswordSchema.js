@@ -4,7 +4,7 @@ const resetPasswordSchema = yup
   .object({
     password: yup
       .string()
-      .min(6, "Password must be at least 8 characters")
+      .min(6, "Password must be at least 6 characters")
 
       .required("New password is required"),
     confirmPassword: yup

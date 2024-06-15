@@ -21,21 +21,54 @@ const Header = () => {
     }
   };
 
+  // const handleFullScreen = () => {
+  //   if (document.fullscreenEnabled) {
+  //     document.documentElement.requestFullscreen();
+  //   }
+  // };
+
   const handleFullScreen = () => {
-    if (document.fullscreenEnabled) {
-      document.documentElement.requestFullscreen();
+    if (!document.fullscreenElement) {
+      // If not in fullscreen mode, enter fullscreen mode
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        // Firefox
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        // Chrome, Safari and Opera
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        // IE/Edge
+        document.documentElement.msRequestFullscreen();
+      }
+    } else {
+      // If already in fullscreen mode, exit fullscreen mode
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        // IE/Edge
+        document.msExitFullscreen();
+      }
     }
   };
 
   return (
-    <header className="h-[72px] flex items-center justify-between px-6  bg-white  w-full">
+    // h-[72px] flex items-center justify-between px-6  bg-white  w-full fixed z-10
+    <header className="header">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center ">
-          <h1 className="text-lg font-semibold text-[22px] mr-3">AI Chat</h1>
+          <h1 className="text-xl font-semibold text-[22px] mr-3">AI Chat</h1>
           <div className="mr-3 bg-[#F2F2F2] px-3 py-2 rounded-lg">
-            <span className="text-lg font-medium">120 Token Remaining</span>
+            <span className="text-xl font-medium">120 Token Remaining</span>
           </div>
-          <button className="border border-customGreen px-3 py-2 text-customGreen rounded b">
+          <button className="border border-customGreen text-xl px-3 py-2 text-customGreen rounded b">
             Upgrade
           </button>
         </div>
@@ -43,7 +76,7 @@ const Header = () => {
 
         {/* Buttons */}
         <div className="flex items-center">
-          <div className="max-w-24 flex items-center justify-between bg-[#F3F3F3] p-1 rounded mr-5">
+          {/* <div className="max-w-24 flex items-center justify-between bg-[#F3F3F3] p-1 rounded mr-5">
             <button
               className={`mr-2 p-1 rounded ${
                 currentTheme === "light" ? "bg-white " : ""
@@ -60,7 +93,7 @@ const Header = () => {
             >
               <DarkModeIcon />
             </button>
-          </div>
+          </div> */}
           <button className="mr-5">
             <NotificationIcon />
           </button>

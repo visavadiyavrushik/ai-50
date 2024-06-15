@@ -1,6 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Avtar,
@@ -10,26 +11,44 @@ import {
   LogoutIcon,
   PricingIcon,
 } from "../../assets";
+import {
+  fetchUserDetails,
+  logout,
+  resetApp,
+} from "../../redux/slices/authSlice";
 
-export default function ProfileHeader() {
+const ProfileHeader = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { userDetails } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!userDetails) {
+      // dispatch(fetchUserDetails());
+    }
+  }, [dispatch, userDetails]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(resetApp());
+    navigate("/");
+  };
+
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="">
-            <div className="flex text-left items-center gap-4">
-              <img className="w-10 h-10 rounded" src={Avtar} alt="" />
-              <div className="font-medium">
-                <div>Mark Roastler</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  Pro Trial
-                </div>
+        <Menu.Button className="">
+          <div className="flex text-left items-center gap-4">
+            <img className="w-10 h-10 rounded" src={Avtar} alt="" />
+            <div className="font-medium">
+              <div className="text-xl">John Doe</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                Pro Trial
               </div>
-              <DoenArrowIcon />
             </div>
-          </Menu.Button>
-        </div>
+            <DoenArrowIcon />
+          </div>
+        </Menu.Button>
 
         <Transition
           as={Fragment}
@@ -86,7 +105,7 @@ export default function ProfileHeader() {
                     className={`${
                       active ? "bg-customGreen text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => navigate("/")}
+                    onClick={() => handleLogout()}
                   >
                     <LogoutIcon className="mr-2 h-5 w-5" />
                     Log out
@@ -99,4 +118,6 @@ export default function ProfileHeader() {
       </Menu>
     </div>
   );
-}
+};
+
+export default ProfileHeader;
