@@ -1,22 +1,18 @@
 import axios from "axios";
 import { Toast } from "../../utils/Toasts";
+import { urls } from "../Urls";
 
 export class AuthService {
   static axiosInstance = axios.create({
-    baseURL: "https://ai50-backend.azurewebsites.net/api/v1",
+    baseURL: urls.local_base_url,
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  static async get(url, config = {}) {
+  static async get(url) {
     try {
-      const token = localStorage.getItem("accessToken");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      const response = await this.axiosInstance.get(url, {
-        ...config,
-        headers,
-      });
+      const response = await this.axiosInstance.get(url);
       return response.data;
     } catch (error) {
       this.handleErrors(error);
@@ -24,16 +20,24 @@ export class AuthService {
     }
   }
 
-  static async post(url, body, config = {}) {
+  static async post(url, body) {
     try {
-      console.log("Post", url);
+      const response = await this.axiosInstance.post(url, body);
+      return response.data;
+    } catch (error) {
+      this.handleErrors(error);
+      return Promise.reject(error);
+    }
+  }
+
+  static async getWithAuth(url, config = {}) {
+    try {
       const token = localStorage.getItem("accessToken");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      const response = await this.axiosInstance.post(url, body, {
+      const response = await this.axiosInstance.get(url, {
         ...config,
         headers,
       });
-      console.log("response", response);
       return response.data;
     } catch (error) {
       this.handleErrors(error);

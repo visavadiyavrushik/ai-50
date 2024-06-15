@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
-  ArchiveIcon,
   ChatIcon,
   InputSearchIcon,
-  KababIcon,
   MemberIcon,
   PinIcon,
   PlusIcon,
@@ -11,24 +11,53 @@ import {
   WorkspaceIcon,
 } from "../../assets";
 import InputWithIcon from "../InputWithIcon";
-import SidebarAccordion from "../SidebarAccordion";
-import ChatHistory from "../ChatHistory";
+import SidebarSection from "../SidebarSection";
+import SidebarButton from "../SidebarButton";
+import {
+  chatHistory,
+  clearSelectedChatHistory,
+} from "../../redux/slices/chatSlice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const { chatHistory: chats, isHistoryLoaded } = useSelector(
+    (state) => state.chat
+  );
+
+  useEffect(() => {
+    if (!isHistoryLoaded) {
+      // dispatch(chatHistory());
+    }
+  }, [dispatch, isHistoryLoaded]);
+
+  const { pinnedChats, historyChats } = useMemo(
+    () => ({
+      pinnedChats: chats
+        .filter((chat) => chat.is_pinned)
+        .map((chat) => ({ ...chat, icon: PinIcon })),
+      historyChats: chats
+        .filter((chat) => !chat.is_pinned)
+        .map((chat) => ({ ...chat, icon: ChatIcon })),
+    }),
+    [chats]
+  );
+
+  const handleNewChat = () => {
+    dispatch(clearSelectedChatHistory());
+  };
+
   return (
-    <div className="sidebar ">
+    <div className="sidebar bg-white ">
       <div className="sidebar-inner">
         <div className="sticky top-0  flex justify-center py-3 b w-full side-bar-logo h-[72px]">
           <SideBarLogo className="" />
         </div>
         <div className="px-4 chat-inner">
-          <button
-            className="bg-customGreen text-lg mt-5 p-3  rounded inline-flex justify-center items-center w-full  "
-            onClick={() => console.log("New Chat")}
-          >
-            <PlusIcon />
-            <span className="text-white ml-3  "> New Chat</span>
-          </button>
+          <SidebarButton
+            icon={PlusIcon}
+            text={<span className="text-white ml-3">New Chat</span>}
+            onClick={handleNewChat}
+          />
           <hr className="my-4" />
           <InputWithIcon
             customClass="border-0"
@@ -37,81 +66,46 @@ const Sidebar = () => {
             placeholder="Search"
             type="text"
           />
-          {/* Pinned */}
-          <div className="mt-4">
-            <SidebarAccordion
+          {pinnedChats.length > 0 && (
+            <SidebarSection
               title="Pinned"
-              answer={
-                <>
-                  <ChatHistory
-                    description="OT hours by Job Role"
-                    date="8 Jan"
-                    useChatIcon={<PinIcon className="start-icon" />}
-                    // useArchiveIcon
-                  />
-
-                  <ChatHistory
-                    description="OT hours by Job Role"
-                    date="8 Jan"
-                    useChatIcon={<PinIcon className="start-icon" />}
-                    // useArchiveIcon
-                  />
-                </>
-              }
+              items={pinnedChats}
+              isPinned={true}
             />
-          </div>
-          <div className="mt-4">
-            {/* History */}
-            <SidebarAccordion
+          )}
+          {historyChats.length > 0 && (
+            <SidebarSection
               title="History"
-              answer={
-                <>
-                  <ChatHistory
-                    description="Make a Description about this"
-                    date="8 Jan"
-                    useArchiveIcon
-                  />
-                  <ChatHistory
-                    description="Make a Description about this"
-                    date="8 Jan"
-                    useArchiveIcon
-                  />
-                  <ChatHistory
-                    description="Make a Description about this"
-                    date="8 Jan"
-                    useArchiveIcon
-                  />
-                </>
-              }
+              items={historyChats}
+              isPinned={false}
             />
-          </div>
+          )}
         </div>
 
         <div className="mx-4 pt-4  bottom-5 bg-white">
-          <button
-            className=" text-lg  px-2  mb-7 rounded inline-flex  items-center w-full  "
+          <SidebarButton
+            className=" text-xl  px-2  mb-7 rounded inline-flex  items-center w-full  "
+            icon={MemberIcon}
+            text={<span className="ml-3">Invite Member</span>}
             onClick={() => console.log("New Chat")}
-          >
-            <MemberIcon />
-            <span className="ml-3"> New Chat</span>
-          </button>
-          <button
-            className=" text-lg  px-2 mb-4 rounded inline-flex  items-center w-full  "
-            onClick={() => console.log("New Chat")}
-          >
-            <WorkspaceIcon />
-            <div className="flex flex-col">
-              <span className="ml-3">Add Team workspace</span>
-              <label className="text-sm text-gray-500 dark:text-gray-400">
-                Collaborate on a Team plan
-              </label>
-            </div>
-          </button>
+          />
+          <SidebarButton
+            className=" text-xl  px-2 mb-4 rounded inline-flex  items-center w-full  "
+            icon={WorkspaceIcon}
+            text={
+              <>
+                <div className="flex flex-col">
+                  <span className="ml-3">Add Team workspace</span>
+                  <label className="text-sm text-gray-500 dark:text-gray-400">
+                    Collaborate on a Team plan
+                  </label>
+                </div>
+              </>
+            }
+            onClick={() => console.log("Add Team Workspace")}
+          />
         </div>
       </div>
-      {/* <div className="sidebarcloseicon">
-        <ArchiveIcon />
-      </div> */}
     </div>
   );
 };

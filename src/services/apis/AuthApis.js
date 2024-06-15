@@ -29,4 +29,8 @@ export class AuthApi {
   static checkEmailExists(data) {
     return AuthService.post(urls.auth.check_email, data);
   }
+
+  static fetchUserDetails() {
+    return AuthService.getWithAuth(urls.auth.user_details);
+  }
 }

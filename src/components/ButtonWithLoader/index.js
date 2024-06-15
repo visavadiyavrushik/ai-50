@@ -11,7 +11,7 @@ const ButtonWithLoader = ({
 }) => {
   return (
     <button
-      className={`${bgColor} hover:${bgColor} text-white font-bold mt-[20px] py-2 px-4 rounded w-full flex justify-center items-center ${className}`}
+      className={`${bgColor} hover:${bgColor} text-white font-bold mt-[20px] py-2 px-4 rounded w-full flex justify-center items-center text-[22px] ${className}`}
       disabled={isLoading || disabled}
       onClick={onClick}
     >

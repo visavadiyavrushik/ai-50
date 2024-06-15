@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import Loading from "../components/Loading";
 
+import CommonLayout from "../layout/AuthLayout";
+
 const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const SocialSignup = lazy(() => import("../pages/SocialSignIn"));
@@ -14,7 +16,9 @@ const authRoutes = [
     element: (
       <Suspense fallback={<Loading />}>
         {" "}
-        <SocialSignup />
+        <CommonLayout>
+          <SocialSignup />
+        </CommonLayout>
       </Suspense>
     ),
   },
@@ -22,7 +26,9 @@ const authRoutes = [
     path: "signin",
     element: (
       <Suspense fallback={<Loading />}>
-        <SignIn />
+        <CommonLayout>
+          <SignIn />
+        </CommonLayout>
       </Suspense>
     ),
   },
@@ -30,7 +36,9 @@ const authRoutes = [
     path: "signup",
     element: (
       <Suspense fallback={<Loading />}>
-        <SignUp />
+        <CommonLayout>
+          <SignUp />
+        </CommonLayout>
       </Suspense>
     ),
   },
@@ -38,7 +46,9 @@ const authRoutes = [
     path: "verify-code",
     element: (
       <Suspense fallback={<Loading />}>
-        <VerifyCode />
+        <CommonLayout>
+          <VerifyCode />
+        </CommonLayout>
       </Suspense>
     ),
   },
@@ -46,7 +56,9 @@ const authRoutes = [
     path: "forgot-password",
     element: (
       <Suspense fallback={<Loading />}>
-        <ForgotPassword />
+        <CommonLayout>
+          <ForgotPassword />
+        </CommonLayout>
       </Suspense>
     ),
   },
@@ -54,7 +66,9 @@ const authRoutes = [
     path: "reset-password",
     element: (
       <Suspense fallback={<Loading />}>
-        <ResetPassword />
+        <CommonLayout>
+          <ResetPassword />
+        </CommonLayout>
       </Suspense>
     ),
   },

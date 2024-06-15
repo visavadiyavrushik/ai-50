@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import NotFound from "../pages/NotFound";
-import authRoutes from "./authRoutes";
-import dashboardRoutes from "./dashboardRoutes";
+import authRoutes from "../routes/authRoutes";
+import dashboardRoutes from "../routes/dashboardRoutes";
 
 const routes = [
   ...authRoutes,

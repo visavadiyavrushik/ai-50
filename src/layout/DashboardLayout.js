@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 
 const DashboardLayout = ({ children }) => {
   return (
-    // <div className="">
     <div className="flex h-full">
       <Sidebar />
       <div className="layout-content-wrapper ">
@@ -14,7 +13,6 @@ const DashboardLayout = ({ children }) => {
         <Footer />
       </div>
     </div>
-    // </div>
   );
 };
 

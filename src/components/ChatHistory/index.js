@@ -1,140 +1,114 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
+import { Popover } from "@headlessui/react";
+import { usePopper } from "react-popper";
+
+import { formatDate } from "../../helpers/dateHelper";
+import { setSelectedChatHistory } from "../../redux/slices/chatSlice";
+
 import {
   ArchiveIcon,
-  ChatIcon,
   DeleteIcon,
   KababIcon,
   LogoutIcon,
   PenIcon,
-  PricingIcon,
 } from "../../assets";
-import { Menu, Transition } from "@headlessui/react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ChatHistory = ({
+  icon: Icon,
   title,
-  date,
-  description,
-  useChatIcon,
-  useArchiveIcon,
+  updated_at,
+  is_pinned,
+  isPinned = false,
+  id,
 }) => {
-  const handleClick = () => {};
+  const dispatch = useDispatch();
+
+  const { selectedChatHistory } = useSelector((state) => state.chat);
+
+  // const [showKababMenu, setShowKababMenu] = useState(false);
+  let [referenceElement, setReferenceElement] = useState();
+  let [popperElement, setPopperElement] = useState();
+  let { styles, attributes } = usePopper(referenceElement, popperElement);
+
+  const handleChatHistoryClick = () => {
+    console.log("sideba clicked");
+    // dispatch(
+    //   setSelectedChatHistory({
+    //     id,
+    //     icon: Icon,
+    //     title,
+    //     updated_at,
+    //     is_pinned,
+    //   })
+    // );
+  };
   return (
-    <div className="relative ">
-      <div className="my-4 flex text-left items-center gap-2 bg-customGray border border-[#E0E0E0] p-2 rounded-lg kababIconVisible">
-        {useChatIcon ? useChatIcon : <ChatIcon className="start-icon" />}
+    <div className="relative" onClick={handleChatHistoryClick}>
+      <div
+        className={`my-4 flex text-left items-center gap-2 bg-customGray border border-[#E0E0E0] p-2 rounded-lg ${
+          id === selectedChatHistory?.id
+            ? "kababIconVisible"
+            : "kababIconVisibleForNotSelected"
+        } `}
+      >
+        <Icon className="start-icon" />
         <div className="font-medium">
-          <p className="m-0 overflow-hidden overflow-ellipsis whitespace-nowrap text-lg max-w-[232px]">
-            {title || description}
+          <p className="m-0 overflow-hidden overflow-ellipsis whitespace-nowrap text-[16px] max-w-[232px]">
+            {title}
           </p>
           <label className="text-sm text-gray-500 dark:text-gray-400">
-            {date}
+            {formatDate(updated_at)}
           </label>
         </div>
         <div className="absolute right-2 chat-icons bg-inherit flex">
-          <Menu as="div" className="relative inline-block text-left">
-            <Menu.Button className="">
-              <KababIcon
-                className="cursor-pointer"
-                onClick={() => handleClick()}
-              />
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-bottom-right divide-x divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10">
-                  <div>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          className={`${
-                            active
-                              ? "bg-customGreen text-white"
-                              : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          Hide from Sidebar
-                        </button>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu.Button>
-          </Menu>
-          {useArchiveIcon && (
-            <Menu as="div" className="relative inline-block text-left">
-              <Menu.Button className="">
+          <Popover>
+            <Popover.Button ref={setReferenceElement}>
+              {" "}
+              <KababIcon className="cursor-pointer" />
+            </Popover.Button>
+
+            <Popover.Panel
+              ref={setPopperElement}
+              style={styles.popper}
+              {...attributes.popper}
+              className={`bg-white poper-custom-kabab`}
+            >
+              <button className="group flex w-full items-center rounded-md px-2 py-2 text-base hover:bg-customGreen hover:text-white">
+                Hide from Sidebar
+              </button>
+            </Popover.Panel>
+          </Popover>
+          {!isPinned && (
+            <Popover>
+              <Popover.Button ref={setReferenceElement}>
+                {" "}
                 <ArchiveIcon className="cursor-pointer ms-1" />
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                // show={true}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
+              </Popover.Button>
+
+              <Popover.Panel
+                ref={setPopperElement}
+                style={styles.popper}
+                {...attributes.popper}
+                className={`bg-white poper-custom`}
               >
-                <Menu.Items
-                  //   aria-disabled="true"
+                <button className="group flex w-full items-center rounded-md px-2 py-2 text-base hover:bg-customGreen hover:text-white">
+                  <LogoutIcon className="mr-2 h-5 w-5 !rotate-90" />
+                  Share
+                </button>
 
-                  className="absolute right-0 mt-2  p-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10 "
+                <button className="group flex w-full items-center rounded-md px-2 py-2 text-base hover:bg-customGreen hover:text-white">
+                  <PenIcon className="mr-2 h-5 w-5" />
+                  Rename
+                </button>
+                <button
+                  className={` group flex w-full items-center rounded-md px-2 py-2 text-base hover:bg-customGreen hover:text-white`}
                 >
-                  <div>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          className={`${
-                            active
-                              ? "bg-customGreen text-white"
-                              : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          <LogoutIcon className="mr-2 h-5 w-5 !rotate-90" />
-                          Share
-                        </button>
-                      )}
-                    </Menu.Item>
-
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          className={`${
-                            active
-                              ? "bg-customGreen text-white"
-                              : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          <PenIcon className="mr-2 h-5 w-5" />
-                          Rename
-                        </button>
-                      )}
-                    </Menu.Item>
-
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          className={`${
-                            active
-                              ? "bg-customGreen text-white"
-                              : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-base`}
-                        >
-                          <DeleteIcon className="mr-2 h-5 w-5" />
-                          Delete Chat
-                        </button>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+                  <DeleteIcon className="mr-2 h-5 w-5" />
+                  Delete Chat
+                </button>
+              </Popover.Panel>
+            </Popover>
           )}
         </div>
       </div>

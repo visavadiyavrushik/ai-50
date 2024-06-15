@@ -1,48 +1,37 @@
 import React, { useState } from "react";
-import { ReactComponent as PasswordSvg } from "../../assets/password.svg";
-import { ReactComponent as InvisiblePasswordSvg } from "../../assets/invisiblePassword.svg";
 
 const InputWithIcon = React.forwardRef(
   (
     {
       icon: Icon,
       placeholder,
-      type,
+      type = "text",
       customClass = "",
       mainDiv = "",
       error,
-      isPassword,
       bgColor,
       ...props
     },
     ref
   ) => {
-    const [passwordVisible, setPasswordVisible] = useState(false);
-
-    const togglePasswordVisibility = () => {
-      setPasswordVisible(!passwordVisible);
+    const [inputType, setInputType] = useState(type);
+    const toggleShowPassword = () => {
+      setInputType((currentType) =>
+        currentType === "password" ? "text" : "password"
+      );
     };
 
     return (
       <>
         <div className={`relative mt-5 inputWithIcon ${mainDiv}`}>
-          {!isPassword && (
-            <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-              {Icon && <Icon />}
-            </span>
-          )}
-          {isPassword && (
-            <span
-              className="absolute inset-y-0 left-0 flex items-center pl-2"
-              onClick={togglePasswordVisibility}
-            >
-              {passwordVisible ? <PasswordSvg /> : <InvisiblePasswordSvg />}
-            </span>
-          )}
+          <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+            {Icon && <Icon />}
+          </span>
+
           <input
-            ref={ref} // Forward the ref to the input element
-            type={isPassword && passwordVisible ? "text" : type}
-            className={`pl-10 pr-4 py-3 border ${
+            ref={ref}
+            type={inputType}
+            className={`pl-10 pr-2 py-2 border text-[16px] ${
               error ? "border-red-500" : "border-[#312E36] "
             } ${
               bgColor || "bg-transparent"
@@ -52,8 +41,20 @@ const InputWithIcon = React.forwardRef(
             placeholder={placeholder}
             {...props}
           />
+          {type === "password" && (
+            <button
+              type="button"
+              onClick={toggleShowPassword}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-[16px] text-customGreen"
+              aria-label={
+                inputType === "password" ? "Show password" : "Hide password"
+              }
+            >
+              {inputType === "password" ? "Show" : "Hide"}
+            </button>
+          )}
         </div>
-        {error && <p className="text-red-500 text-sm mt-0">{error}</p>}
+        {error && <p className="text-red-500 text-base mt-0">{error}</p>}
       </>
     );
   }
