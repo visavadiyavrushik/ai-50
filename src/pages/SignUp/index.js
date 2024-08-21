@@ -14,6 +14,7 @@ import InputWithIcon from "../../components/InputWithIcon";
 import signUpSchema from "../../validators/signUpSchema";
 import ButtonWithLoader from "../../components/ButtonWithLoader";
 import { useUnauth } from "../../hooks/useAuth";
+import { AuthApi } from "../../services/apis/AuthApis";
 
 const SignUp = () => {
   useUnauth();
@@ -30,7 +31,7 @@ const SignUp = () => {
   });
 
   const checkEmail = async (data) => {
-    navigate("/verify-code");
+    // navigate("/verify-code");
     // dispatch(checkEmailExists({ email: data.email })).then((response) => {
     //   if (
     //     response.payload.success === "True" ||
@@ -39,6 +40,24 @@ const SignUp = () => {
     //     sendCodeToEmail(data);
     //   }
     // });
+    try {
+      await AuthApi.signup({
+        fullName: data.full_name,
+        email: data?.email,
+        password: data.password,
+      });
+
+      const response = await AuthApi.signup(data);
+      console.log(response);
+
+      Toast.success(response.message);
+
+      navigate("/signin");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      // setIsLoading(false);
+    }
   };
 
   // const sendCodeToEmail = async (data) => {
@@ -68,7 +87,7 @@ const SignUp = () => {
             <BackArrow />
           </button>
           <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
-            Ready to Use AI50?
+            Ready to Use AI Minds?
           </h1>
           <p className="text-lg text-center lg:text-left ">Sign Up</p>
         </div>

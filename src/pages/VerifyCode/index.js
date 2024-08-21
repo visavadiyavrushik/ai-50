@@ -96,7 +96,7 @@ const VerifyCode = () => {
             <BackArrow />
           </button>
           <h1 className="text-4xl text-center lg:text-left font-extrabold mb-2">
-            Ready to Use AI50?
+            Ready to Use AI Minds?
           </h1>
           <p className="text-lg text-center lg:text-left ">
             Verify your Email Address, Enter Code

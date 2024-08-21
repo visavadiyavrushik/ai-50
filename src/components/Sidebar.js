@@ -17,11 +17,11 @@ import ChatAccordion from "./ChatAccordion";
 
 const Sidebar = () => {
   return (
-    <div className="relative w-[340px] h-full bg-white max-h-fit overflow-auto  ">
+    <div className="relative w-[340px] h-full bg-white max-h-fit overflow-auto  sticky top-0">
       <div className="sticky top-0  flex justify-center py-3 b w-full side-bar-logo h-[72px]">
         <SideBarLogo className="" />
         {/* <h1 className="text-4xl font-extrabold hidden dark:flex dark:text-white ">
-          AI50
+          AI Minds
         </h1> */}
       </div>
       <div className="px-4 chat-inner">

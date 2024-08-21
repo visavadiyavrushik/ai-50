@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="bg-grayShade  w-100 py-3.5">
       <div className="flex items-center justify-between px-16">
         <div className="">
-          <p>2024© AI50 Team</p>
+          <p>2024© AI Minds Team</p>
         </div>
         <div>
           <Link to="#" className="mr-8">
